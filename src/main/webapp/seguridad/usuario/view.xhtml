@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/facelets/templates/entidadTemplate.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <ui:define name="content">
+        <h:form id="frmUsuarioView" style="text-align: left">
+            <p:panel id="pnView" header="#{bundle.UsuarioViewTitle}" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.UsuarioLabelNombre} "/>
+                    <h:outputText value="#{mbUsuario.selected.nombre}" title="#{bundle.UsuarioLabelNombre}"/>     
+                    
+                    <h:outputLabel value="#{bundle.UsuarioLabelNombreCompleto} "/>
+                    <h:outputText value="#{mbUsuario.selected.nombreCompleto}" title="#{bundle.UsuarioLabelNombreCompleto}"/>     
+
+                    <h:outputLabel value="#{bundle.UsuarioLabelRol} "/>
+                    <h:outputText value="#{mbUsuario.selected.rol.nombre}" title="#{bundle.CreateRolTitle_nombre}"/>
+
+
+                    <h:outputLabel value="#{bundle.UsuarioLabelFechaAlta} "/>
+                    <h:outputText value="#{mbUsuario.selected.admin.strFechaAlta}" title="#{bundle.UsuarioLabelFechaAlta}"/>   
+
+                    <h:outputLabel value="#{bundle.UsuarioLabelUsAlta} "/>
+                    <h:outputText value="#{mbUsuario.selected.admin.usAlta.nombreCompleto}" title="#{bundle.UsuarioLabelUsAlta}"/> 
+                </h:panelGrid>                    
+            </p:panel>
+            
+            <p:toolbar>
+                <f:facet name="right">
+                    <p:commandButton icon="ui-icon-refresh" action="#{mbUsuario.prepareList}" value="Volver" ajax="false"/>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

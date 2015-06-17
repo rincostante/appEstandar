@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="resources/css/estilos.css" type="text/css" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico"/>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>SAyDS - Aplicaciones</title>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit id="top" styleClass="top" position="north" >
+                <h:panelGrid id="topPg" columns="3" styleClass="topPg" >
+                    <img src="resources/img/sayds_beige.gif" />
+                    <p:outputLabel id="topOl" value="#{bundle.Aplicacion}" styleClass="topOl" style="font-size: xx-large" />
+                </h:panelGrid>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h:form>
+
+                    
+                    
+                    <ui:insert name="content">Página en construcción</ui:insert>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit id="botton" styleClass="botton" position="south" >
+                    <p:panel style="background-color: #424242; text-align: center; border: none; height: 100%; border-color: #424242" >
+                        <h:panelGrid id="bottonPg" columns="1" styleClass="bottonPg">
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_1}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_2}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_3}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_4}" style="font-size: small"/>
+                        </h:panelGrid>
+                    </p:panel>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/facelets/templates/entidadTemplate.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <ui:define name="content">
+        <h:form>
+            <p:panel id="pnNew" header="#{bundle.UsuarioNewTitle}" style="margin-bottom:10px;">
+                <p:growl id="messages" />
+                <h:panelGrid columns="2">    
+                    
+                    <p:outputLabel value="#{bundle.UusarioLabelUsDisp}" for="usDispList"/>      
+                    <p:selectOneMenu id="usDispList" value="#{mbUsuario.usSeleccionado}" 
+                                     requiredMessage="#{bundle.CreateUsuarioUsDispRequiredMessage}" 
+                                     required="true">
+                        <f:selectItem itemLabel="Seleccione el Usuario vinculado" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{mbUsuario.lstUsDisponibles}" var="usDisp" itemLabel="#{usDisp}" itemValue="#{usDisp}"/>
+                    </p:selectOneMenu>  
+                    
+                    <p:outputLabel value="#{bundle.UsuarioLabelRol}" for="rolList"/>      
+                    <p:selectOneMenu id="rolList" value="#{mbUsuario.selected.rol}" 
+                                     requiredMessage="#{bundle.CreateUsuarioRolRequiredMessage}" 
+                                     required="true">
+                        <f:selectItem itemLabel="Seleccione el Rol" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{mbUsuario.listaRol}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol}"/>
+                    </p:selectOneMenu> 
+                  
+                </h:panelGrid>
+            </p:panel>
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton icon="ui-icon-check" value="Guardar" action="#{mbUsuario.create}" update="pnNew"/>
+                    <p:commandButton icon="ui-icon-cancel" value="Limpiar" style="float: right">
+                        <p:ajax update="pnNew" resetValues="true" />
+                    </p:commandButton>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton icon="ui-icon-arrowreturnthick-1-w" action="#{mbUsuario.prepareList}" value="Volver" immediate="true" ajax="false"/>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

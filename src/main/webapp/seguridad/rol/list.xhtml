@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/facelets/templates/entidadTemplate.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+        <f:metadata>  
+            <f:event listener="#{mbRol.iniciar}" type="preRenderView"></f:event>  
+        </f:metadata>
+        <h:form>
+            <p:panel id="rolForm" header="#{bundle.RolListTitle}" style="margin-bottom:10px;">
+                <h:panelGrid columns="6">
+                    <p:commandButton icon="ui-icon-newwin" value="Agregar Nuevo" action="#{mbRol.prepareCreate}"/>
+                    <p:commandButton icon="ui-icon-refresh" value="Refrescar Listado" action="#{mbRol.prepareList}" update="rolList"/>
+                </h:panelGrid>
+            </p:panel>
+            <p:dataTable value="#{mbRol.items}" 
+                         filteredValue="#{mbRol.listaFilter}"
+                         var="e" 
+                         id="rolList" 
+                         rows="5"
+                         paginator="true"
+                         widgetVar="rolTable"                             
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+
+                <f:facet name="header">
+                   #{bundle.RolListTitle}  
+                    <p:commandButton id="toggler" type="button" value="Columnas" icon="ui-icon-calculator" style="margin-left: 10px" />
+                    <p:columnToggler datasource="rolList" trigger="toggler" />
+                </f:facet>
+
+                <p:column headerText="Nombre" filterMatchMode="contains" sortBy="#{e.nombre}" filterBy="#{e.nombre}">
+                    <p:outputLabel value="#{e.nombre}"/>
+                </p:column>
+
+                <p:column filterBy="#{e.adminentidad.habilitado}" headerText="Estado" filterMatchMode="equals">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('rolTable').filter()" style="font-size: 80%;">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="Todos" itemValue="" />
+                            <f:selectItem itemLabel="Activos" itemValue="true" />
+                            <f:selectItem itemLabel="Inactivos" itemValue="false" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{e.adminentidad.habilitado ? 'Habilitado': 'Deshabilitado'}" />
+                </p:column>
+
+                <p:column headerText="Acciones" style="width:140px">
+                    <p:growl id="messages" showDetail="true" />                           
+                    <p:commandButton icon="ui-icon-zoomin" action="#{mbRol.prepareView}" title="Ver Detalle">
+                        <f:setPropertyActionListener value="#{e}" target="#{mbRol.current}" />  
+                    </p:commandButton>
+
+                    <p:commandButton icon="ui-icon-pencil" action="#{mbRol.prepareEdit}" title="Editar" >
+                        <f:setPropertyActionListener value="#{e}" target="#{mbRol.current}" /> 
+                    </p:commandButton>
+
+                    <p:commandButton icon="ui-icon-close"  action="#{mbRol.deshabilitar}" rendered="#{e.adminentidad.habilitado == 'true'}"
+                                     title="Deshabilitar" update="rolList">
+                        <f:setPropertyActionListener value="#{e}"  target="#{mbRol.current}" />
+                        <p:confirm header="Confirmar" message="¿Desea deshabilitar el Rol?" icon="ui-icon-alert" />
+                    </p:commandButton>                
+
+                    <p:commandButton icon="ui-icon-check" action="#{mbRol.habilitar}" rendered="#{e.adminentidad.habilitado == 'false'}" 
+                                     title="Habilitar" update="rolList">
+                        <f:setPropertyActionListener value="#{e}" target="#{mbRol.current}" />
+                        <p:confirm header="Confirmar" message="¿Desea habilitar el Rol?" icon="ui-icon-alert" />
+                    </p:commandButton> 
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>      
+                </p:column>                
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

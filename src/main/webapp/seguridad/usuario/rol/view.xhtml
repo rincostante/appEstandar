@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/facelets/templates/entidadTemplate.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <ui:define name="content">
+        <h:form id="frmRolView">
+            <p:panel id="pnView" header="#{bundle.RolViewTitle}" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRolLabel_nombre}"/>
+                    <h:outputText value="#{mbRol.selected.nombre}" title="#{bundle.CreateRolTitle_nombre}"/>
+
+                    <h:outputLabel value="#{bundle.UsuarioAlta}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.usAlta}" title="#{bundle.UsuarioAlta}"/>                        
+
+                    <h:outputLabel value="#{bundle.FechaAlta}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.strFechaAlta}" title="#{bundle.FechaAlta}"/>                         
+
+                    <h:outputLabel value="#{bundle.UsuarioModifica}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.usModif}" title="#{bundle.UsuarioModifica}"/>                        
+
+                    <h:outputLabel value="#{bundle.FechaModifica}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.strFechaModif}" title="#{bundle.FechaModifica}"/>                          
+
+                    <h:outputLabel value="#{bundle.UsuarioBaja}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.usBaja}" title="#{bundle.UsuarioBaja}"/>                        
+
+                    <h:outputLabel value="#{bundle.FechaBaja}"/>
+                    <h:outputText value="#{mbRol.selected.adminentidad.strFechaBaja}" title="#{bundle.FechaBaja}"/>  
+
+                    <h:outputLabel value="#{bundle.UsuariosAsociados}" />
+                    <p:commandButton value="Ver" type="button" onclick="PF('Usuarios').show();" actionListener="#{mbRol.selected.usuarios}" />      
+                </h:panelGrid>   
+                
+                <p:dialog style="font-size: 80%" 
+                          header="Listado de usuarios asociados" 
+                          widgetVar="Usuarios" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          height="100" 
+                          width="30%">
+                    <p:dataTable value="#{mbRol.selected.usuarios}" var="g" id="rolList" filteredValue="#{mbRol.listUsFilter}">
+                        <p:column headerText="Usuarios" filterMatchMode="contains" filterBy="#{g.nombre}" sortBy="#{g.nombre}" >
+                            <p:outputLabel value="#{g.nombre}"/> 
+                        </p:column>                        
+                    </p:dataTable>
+                </p:dialog>
+            </p:panel>
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton icon="ui-icon-refresh" action="#{mbRol.prepareList}" value="Volver" ajax="false"/>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
+

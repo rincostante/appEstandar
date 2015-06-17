@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="resources/css/estilos.css" type="text/css" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico"/>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>SAyDS - Aplicaciones</title>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit id="top" styleClass="top" position="north" >
+                <h:panelGrid id="topPg" columns="3" styleClass="topPg" >
+                    <img src="resources/img/sayds_beige.gif" />
+                    <p:outputLabel id="topOl" value="#{bundle.Aplicacion}" styleClass="topOl" style="font-size: xx-large" />
+                </h:panelGrid>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="Inicio" 
+                                    url="#{bundle.Servidor}#{bundle.RutaAplicacion}" />
+                        <p:submenu label="Administración">
+                            <p:menuitem value="Familia" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizFamilia}/list.xhtml"/>
+                            <p:menuitem value="Genero" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizGenero}/list.xhtml"/> 
+                            <p:menuitem value="Especie" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizEspecie}/list.xhtml"/>                                                               
+                        </p:submenu> 
+                        
+                        <p:submenu label="Parámetros">
+                            <p:menuitem value="Morfología" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizMorfologia}/list.xhtml"/>
+                            <p:menuitem value="Rango" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizRango}/list.xhtml"/> 
+                            <p:menuitem value="Autor" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizAutor}/list.xhtml"/>      
+                            <p:menuitem value="Publicación" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizPublicacion}/list.xhtml"/>
+                            <p:menuitem value="Cites" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizCites}/list.xhtml"/> 
+                            <p:menuitem value="Origen" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizOrigen}/list.xhtml"/>  
+                        </p:submenu> 
+                        
+                        <p:submenu label="Seguridad" rendered="#{mbLogin.ambito == 'Seguridad'}">
+                            <p:menuitem value="Usuarios" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizUsuario}/list.xhtml"/>
+                            <p:menuitem value="Roles" 
+                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizRol}/list.xhtml"/>                                      
+                        </p:submenu> 
+                        
+                        <f:facet name="options">
+                            <p:outputLabel value="Usuario: #{mbLogin.usLogeado.nombreCompleto}" style="margin-right:10px" />
+                            <p:commandButton value="App" icon="ui-icon-home" actionListener="#{mbLogin.logout}" oncomplete="home(xhr, status, args)" style="margin-right:10px" />
+                            <p:commandButton value="Cerrar sesión" icon="ui-icon-extlink" actionListener="#{mbLogin.logout}" oncomplete="logout(xhr, status, args)" />
+                        </f:facet>   
+                    </p:menubar>
+                    <ui:insert name="content">Página en construcción</ui:insert>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit id="botton" styleClass="botton" position="south" >
+                    <p:panel style="background-color: #424242; text-align: center; border: none; height: 100%; border-color: #424242" >
+                        <h:panelGrid id="bottonPg" columns="1" styleClass="bottonPg">
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_1}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_2}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_3}" style="font-size: small"/>
+                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_4}" style="font-size: small"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:layoutUnit>
+        </p:layout>
+    </h:body>
+    
+    <script type="text/javascript">
+        //<![CDATA[
+        function logout(xhr, status, args){
+            setTimeout(function(){
+                window.location = '/gestionAplicaciones/faces/logout.xhtml';
+            }, 500);
+        }
+        
+        function home(xhr, status, args){
+            setTimeout(function(){
+                window.location = '/gestionAplicaciones';
+            }, 500);
+        }           
+        //]]>
+    </script>      
+    
+</html>
+
