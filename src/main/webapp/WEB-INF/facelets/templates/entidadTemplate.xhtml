@@ -6,7 +6,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet"></link>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
         <link href="../../resources/css/estilos.css" type="text/css" rel="stylesheet" />
         <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico"/>
         <f:facet name="first">
@@ -18,7 +22,7 @@
         <p:layout fullPage="true">
             <p:layoutUnit id="top" styleClass="top" position="north" >
                 <h:panelGrid id="topPg" columns="3" styleClass="topPg" >
-                    <img src="../../resources/img/sayds_beige.gif" />
+                    <img src="../../resources/img/logoCoord80x270.jpg" />
                     <p:outputLabel id="topOl" value="#{bundle.Aplicacion}" styleClass="topOl" style="font-size: xx-large" />
                 </h:panelGrid>
             </p:layoutUnit>
@@ -27,30 +31,7 @@
                 <h:form>
                     <p:menubar>
                         <p:menuitem value="Inicio" 
-                                    url="#{bundle.Servidor}#{bundle.RutaAplicacion}" />
-                        <p:submenu label="Administración">
-                            <p:menuitem value="Familia" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizFamilia}/list.xhtml"/>
-                            <p:menuitem value="Genero" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizGenero}/list.xhtml"/> 
-                            <p:menuitem value="Especie" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizEspecie}/list.xhtml"/>                                                               
-                        </p:submenu> 
-                        
-                        <p:submenu label="Parámetros">
-                            <p:menuitem value="Morfología" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizMorfologia}/list.xhtml"/>
-                            <p:menuitem value="Rango" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizRango}/list.xhtml"/> 
-                            <p:menuitem value="Autor" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizAutor}/list.xhtml"/>      
-                            <p:menuitem value="Publicación" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizPublicacion}/list.xhtml"/>
-                            <p:menuitem value="Cites" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizCites}/list.xhtml"/> 
-                            <p:menuitem value="Origen" 
-                                        url="#{bundle.Servidor}#{bundle.RutaAplicacion}/#{bundle.RaizOrigen}/list.xhtml"/>  
-                        </p:submenu> 
+                                    url="#{bundle.Servidor}#{bundle.RutaAplicacion}" /> 
                         
                         <p:submenu label="Seguridad" rendered="#{mbLogin.ambito == 'Seguridad'}">
                             <p:menuitem value="Usuarios" 
@@ -69,14 +50,7 @@
             </p:layoutUnit>
             
             <p:layoutUnit id="botton" styleClass="botton" position="south" >
-                    <p:panel style="background-color: #424242; text-align: center; border: none; height: 100%; border-color: #424242" >
-                        <h:panelGrid id="bottonPg" columns="1" styleClass="bottonPg">
-                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_1}" style="font-size: small"/>
-                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_2}" style="font-size: small"/>
-                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_3}" style="font-size: small"/>
-                            <h:outputLabel styleClass="bottonOl" value="#{bundle.Pie_4}" style="font-size: small"/>
-                        </h:panelGrid>
-                    </p:panel>
+                <img src="../../resources/img/BloquePie.jpg" />
             </p:layoutUnit>
         </p:layout>
     </h:body>

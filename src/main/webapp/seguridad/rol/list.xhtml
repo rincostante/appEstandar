@@ -49,7 +49,7 @@
                     <h:outputText value="#{e.adminentidad.habilitado ? 'Habilitado': 'Deshabilitado'}" />
                 </p:column>
 
-                <p:column headerText="Acciones" style="width:140px">
+                <p:column headerText="Acciones" style="width:110px">
                     <p:growl id="messages" showDetail="true" />                           
                     <p:commandButton icon="ui-icon-zoomin" action="#{mbRol.prepareView}" title="Ver Detalle">
                         <f:setPropertyActionListener value="#{e}" target="#{mbRol.current}" />  
